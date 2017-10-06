@@ -29,7 +29,7 @@ export default class Idle extends Component {
 
   componentDidUpdate(prevProps) {
     if (eventsChanged(prevProps.events, this.props.events)) {
-      this.removeEvents()
+      this.removeEvents(prevProps.events)
       this.attachEvents()
     }
   }
@@ -40,8 +40,8 @@ export default class Idle extends Component {
     })
   }
 
-  removeEvents() {
-    this.props.events.forEach(event => {
+  removeEvents(events = this.props.events) {
+    events.forEach(event => {
       window.removeEventListener(event, this.handleEvent)
     })
   }
